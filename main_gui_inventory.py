@@ -1,4 +1,4 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PySide2 import QtCore, QtGui, QtWidgets
 
 from new_data_dialog import Ui_NewProduct
 from sale_dialog import Ui_Dialog
