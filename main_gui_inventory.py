@@ -15,16 +15,15 @@ class ProductSaleDialog(QtWidgets.QDialog, Ui_Dialog):
         print("venta")
         
 class NewProductDialog(QtWidgets.QDialog, Ui_NewProduct):
-    def __init__(self, text, parent=None):
+    def __init__(self, db, parent=None):
         super(NewProductDialog, self).__init__(parent)
         self.setupUi(self)
-        self.lineEdit.setText(text)
         self.pushButton.clicked.connect(self.add_product)
+        self.db = db
         
     def add_product(self):
         if(self.lineEdit.text() == None or self.lineEdit_6.text()== None): 
             return
-        inv_db = InventoryDB()
         name = self.lineEdit.text()
         category = self.lineEdit_3.text()
         color = self.lineEdit_6.text()
@@ -33,18 +32,21 @@ class NewProductDialog(QtWidgets.QDialog, Ui_NewProduct):
         qty = int(self.lineEdit_2.text())
         data = (name,category,color,location,cost,qty)
         print(data)
-        inv_db.new_product(data)
+        self.db.new_product(data)
         
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
+
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
         self.setupUi(self)
-        self.show_all_items_in_stock()
+        self.inv_db = InventoryDB()
+        #self.show_all_items_in_stock()
         self.pushButton.clicked.connect(self.openNewProductDialog)
         self.pushButton_2.clicked.connect(self.openProductSaleDialog)
-        self.listView.doubleClicked.connect(self.openNewProductDialog)
+        #self.listView.doubleClicked.connect(self.openNewProductDialog)
 
     def show_all_items_in_stock(self):
+        self.inv_db.read_products()
         entries = ['one','two', 'three']
         model = QtGui.QStandardItemModel()
         self.listView.setModel(model)
@@ -53,8 +55,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             model.appendRow(item)
 
     def openNewProductDialog(self):
-        data = self.lineEdit.text()
-        w = NewProductDialog(data)
+        w = NewProductDialog(self.inv_db)
         w.exec_()
         
     def openProductSaleDialog(self):

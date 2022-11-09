@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>693</width>
+    <width>814</width>
     <height>592</height>
    </rect>
   </property>
@@ -153,8 +153,8 @@ alternate-background-color: rgb(174, 182, 255);</string>
    <widget class="QLineEdit" name="lineEdit">
     <property name="geometry">
      <rect>
-      <x>550</x>
-      <y>10</y>
+      <x>660</x>
+      <y>20</y>
       <width>113</width>
       <height>22</height>
      </rect>
@@ -163,14 +163,57 @@ alternate-background-color: rgb(174, 182, 255);</string>
      <string>Buscar Producto</string>
     </property>
    </widget>
-   <widget class="QListView" name="listView">
+   <widget class="QTableWidget" name="tableWidget">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>120</y>
-      <width>631</width>
-      <height>411</height>
+      <x>20</x>
+      <y>130</y>
+      <width>761</width>
+      <height>381</height>
      </rect>
+    </property>
+    <column>
+     <property name="text">
+      <string>ID</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>NOMBRE</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>CATEGORIA</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>UBICACION</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>COSTO</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>COLOR</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>60</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PushButton</string>
     </property>
    </widget>
   </widget>
@@ -179,8 +222,8 @@ alternate-background-color: rgb(174, 182, 255);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>693</width>
-     <height>21</height>
+     <width>814</width>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -190,6 +233,8 @@ alternate-background-color: rgb(174, 182, 255);</string>
     <addaction name="actionLoad_Backup_File"/>
     <addaction name="separator"/>
     <addaction name="actionClose"/>
+    <addaction name="separator"/>
+    <addaction name="actionClose_2"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>
@@ -200,6 +245,11 @@ alternate-background-color: rgb(174, 182, 255);</string>
    </property>
   </action>
   <action name="actionClose">
+   <property name="text">
+    <string>Load Backup File...</string>
+   </property>
+  </action>
+  <action name="actionClose_2">
    <property name="text">
     <string>Close</string>
    </property>

@@ -24,20 +24,20 @@ class InventoryDB:
         self.cursor.execute(sql, product_data)
         self.db.commit()
 
-    def read_products():
-        self.cursor.execute("SELECT * FROM products")
-        result = mycursor.fetchall()
+    def read_products(self):
+        self.cursor.execute("SELECT * FROM product")
+        result = self.cursor.fetchall()
         for x in result:
             print(x)
 
-    def product_sale():
+    def product_sale(self):
         product_name = input('Producto Vendido: ')
         qty = int(input('cantidad de ventas: '))
         name = (product_name,)
 
-        sql = "SELECT qty FROM products WHERE name = %s"
-        aelf.cursor.execute(sql, name)
-        result = mycursor.fetchone()
+        sql = "SELECT qty FROM product WHERE name = %s"
+        self.cursor.execute(sql, name)
+        result = self.cursor.fetchone()
         old_qty = int(result[0])
         print(old_qty)
         new_qty = str(old_qty-qty)
@@ -47,9 +47,9 @@ class InventoryDB:
         self.db.commit()
 
 
-    def delete_product():
+    def delete_product(self):
         product_name = input('Ingresa el nombre del producto: ')
-        sql = "DELETE FROM products WHERE name = %s"
+        sql = "DELETE FROM product WHERE name = %s"
         name = (product_name, )
         self.cursor.execute(sql, name)
         self.db.commit()
