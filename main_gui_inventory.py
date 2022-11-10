@@ -15,50 +15,61 @@ class ProductSaleDialog(QtWidgets.QDialog, Ui_Dialog):
         print("venta")
         
 class NewProductDialog(QtWidgets.QDialog, Ui_NewProduct):
-    def __init__(self, db, parent=None):
+
+    def __init__(self, parent=None):
         super(NewProductDialog, self).__init__(parent)
         self.setupUi(self)
-        self.pushButton.clicked.connect(self.add_product)
-        self.db = db
+        self.product = {}
+        self.pushButton.clicked.connect(self.read_product)
         
-    def add_product(self):
+    def read_product(self):
+        
         if(self.lineEdit.text() == None or self.lineEdit_6.text()== None): 
             return
-        name = self.lineEdit.text()
-        category = self.lineEdit_3.text()
-        color = self.lineEdit_6.text()
-        location = self.lineEdit_5.text()
-        cost = int(self.lineEdit_4.text())
-        qty = int(self.lineEdit_2.text())
-        data = (name,category,color,location,cost,qty)
-        print(data)
-        self.db.new_product(data)
+        self.product['name'] = self.lineEdit.text()
+        self.product['category'] = self.lineEdit_3.text()
+        self.product['color'] = self.lineEdit_6.text()
+        self.product['location'] = self.lineEdit_5.text()
+        self.product['cost'] = int(self.lineEdit_4.text())
+        self.product['qty'] = int(self.lineEdit_2.text())
+        # SEND EVENT DATA READY TO BE STORED
+        self.close()
+
+    def get_product(self):
+        return self.product
+        
         
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
+    products = []
+    
+
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
-        self.setupUi(self)
         self.inv_db = InventoryDB()
+        self.setupUi(self)
         self.show_all_items_in_stock()
         #self.show_items_list()
         self.pushButton.clicked.connect(self.openNewProductDialog)
         self.pushButton_2.clicked.connect(self.openProductSaleDialog)
-        #self.listView.doubleClicked.connect(self.openNewProductDialog)
+        #self.tableWidget.doubleClicked.connect(self.openProductSaleDialog)
 
-    def show_all_items_in_stock(self):
-        product = self.inv_db.read_products()
-            
-        #    ['id'] = x[0]
-        #    ['name'] = x[1]
-        #    ['category'] = x[2]
-        #    ['color'] = x[3]
-        #    ['location'] = x[4]
-        #    ['cost'] = x[5]
-        #    ['qty'] = x[6]
-        self.tableWidget.setRowCount(len(product))
+
+    def add_product(self, product):
+        data = (product['name'], product['category'], product['color'], product['location'], product['cost'], product['qty'])
+        self.inv_db.new_product(data)
+
+    #    ['id'] = x[0]
+    #    ['name'] = x[1]
+    #    ['category'] = x[2]
+    #    ['color'] = x[3]
+    #    ['location'] = x[4]
+    #    ['cost'] = x[5]
+    #    ['qty'] = x[6]
+    def refreshProductTableContent(self):
+        self.tableWidget.setRowCount(len(self.products))
         row_index = 0
-        for x in product:
+        for x in self.products:
             self.tableWidget.setItem(row_index,0,QtWidgets.QTableWidgetItem(str(x[0])))
             self.tableWidget.setItem(row_index,1,QtWidgets.QTableWidgetItem(str(x[1])))
             self.tableWidget.setItem(row_index,2,QtWidgets.QTableWidgetItem(str(x[2])))
@@ -68,6 +79,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.tableWidget.setItem(row_index,6,QtWidgets.QTableWidgetItem(str(x[6])))
             row_index += 1
 
+    def show_all_items_in_stock(self):
+        self.inv_db.read_products(self.products)
+        self.refreshProductTableContent()
 
     def show_items_list(self):
         self.inv_db.read_products()
@@ -79,8 +93,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             model.appendRow(item)
 
     def openNewProductDialog(self):
-        w = NewProductDialog(self.inv_db)
+        w = NewProductDialog()
         w.exec_()
+        self.add_product(w.get_product())
         
     def openProductSaleDialog(self):
         w = ProductSaleDialog()

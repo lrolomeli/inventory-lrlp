@@ -24,13 +24,11 @@ class InventoryDB:
         self.cursor.execute(sql, product_data)
         self.db.commit()
 
-    def read_products(self):
+    def read_products(self, products):
         self.cursor.execute("SELECT * FROM product")
         result = self.cursor.fetchall()
-        lista = list()
         for x in result:
-            lista.append(x)
-        return lista
+            products.append(x)
 
 
     def product_sale(self):
