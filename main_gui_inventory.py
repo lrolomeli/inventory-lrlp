@@ -40,12 +40,36 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         super(MainWindow, self).__init__(parent)
         self.setupUi(self)
         self.inv_db = InventoryDB()
-        #self.show_all_items_in_stock()
+        self.show_all_items_in_stock()
+        #self.show_items_list()
         self.pushButton.clicked.connect(self.openNewProductDialog)
         self.pushButton_2.clicked.connect(self.openProductSaleDialog)
         #self.listView.doubleClicked.connect(self.openNewProductDialog)
 
     def show_all_items_in_stock(self):
+        product = self.inv_db.read_products()
+            
+        #    ['id'] = x[0]
+        #    ['name'] = x[1]
+        #    ['category'] = x[2]
+        #    ['color'] = x[3]
+        #    ['location'] = x[4]
+        #    ['cost'] = x[5]
+        #    ['qty'] = x[6]
+        self.tableWidget.setRowCount(len(product))
+        row_index = 0
+        for x in product:
+            self.tableWidget.setItem(row_index,0,QtWidgets.QTableWidgetItem(str(x[0])))
+            self.tableWidget.setItem(row_index,1,QtWidgets.QTableWidgetItem(str(x[1])))
+            self.tableWidget.setItem(row_index,2,QtWidgets.QTableWidgetItem(str(x[2])))
+            self.tableWidget.setItem(row_index,3,QtWidgets.QTableWidgetItem(str(x[4])))
+            self.tableWidget.setItem(row_index,4,QtWidgets.QTableWidgetItem(str(x[5])))
+            self.tableWidget.setItem(row_index,5,QtWidgets.QTableWidgetItem(str(x[3])))
+            self.tableWidget.setItem(row_index,6,QtWidgets.QTableWidgetItem(str(x[6])))
+            row_index += 1
+
+
+    def show_items_list(self):
         self.inv_db.read_products()
         entries = ['one','two', 'three']
         model = QtGui.QStandardItemModel()
