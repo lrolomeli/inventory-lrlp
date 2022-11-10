@@ -40,18 +40,17 @@ class NewProductDialog(QtWidgets.QDialog, Ui_NewProduct):
         
         
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
-
-    products = []
     
 
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
-        self.inv_db = InventoryDB()
         self.setupUi(self)
+        self.inv_db = InventoryDB()
         self.show_all_items_in_stock()
         #self.show_items_list()
         self.pushButton.clicked.connect(self.openNewProductDialog)
         self.pushButton_2.clicked.connect(self.openProductSaleDialog)
+        self.pushButton_3.clicked.connect(self.refreshProductTableContent)
         #self.tableWidget.doubleClicked.connect(self.openProductSaleDialog)
 
 
@@ -67,9 +66,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     #    ['cost'] = x[5]
     #    ['qty'] = x[6]
     def refreshProductTableContent(self):
-        self.tableWidget.setRowCount(len(self.products))
+        # go to db and retrieve data
+        
+        self.inv_db.update_product_table()
+        products = self.inv_db.get_product_table()
+        self.tableWidget.setRowCount(len(products))
         row_index = 0
-        for x in self.products:
+        for x in products:
             self.tableWidget.setItem(row_index,0,QtWidgets.QTableWidgetItem(str(x[0])))
             self.tableWidget.setItem(row_index,1,QtWidgets.QTableWidgetItem(str(x[1])))
             self.tableWidget.setItem(row_index,2,QtWidgets.QTableWidgetItem(str(x[2])))
@@ -80,7 +83,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             row_index += 1
 
     def show_all_items_in_stock(self):
-        self.inv_db.read_products(self.products)
+        products = list()
+        
         self.refreshProductTableContent()
 
     def show_items_list(self):

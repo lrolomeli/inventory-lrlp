@@ -1,7 +1,9 @@
 import mysql.connector
 
 class InventoryDB:
+
     def __init__(self):
+        self.product_inventory = []
         self.db = mysql.connector.connect(host="localhost", user="root", password="root")
         self.cursor = self.db.cursor()
         self.create_inventariodb()
@@ -24,11 +26,15 @@ class InventoryDB:
         self.cursor.execute(sql, product_data)
         self.db.commit()
 
-    def read_products(self, products):
+    def update_product_table(self):
+        self.product_inventory.clear()
         self.cursor.execute("SELECT * FROM product")
         result = self.cursor.fetchall()
         for x in result:
-            products.append(x)
+            self.product_inventory.append(x)
+
+    def get_product_table(self):
+        return self.product_inventory
 
 
     def product_sale(self):

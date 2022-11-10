@@ -137,7 +137,7 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "COLOR"))
         item = self.tableWidget.horizontalHeaderItem(6)
         item.setText(_translate("MainWindow", "CANTIDAD"))
-        self.pushButton_3.setText(_translate("MainWindow", "PushButton"))
+        self.pushButton_3.setText(_translate("MainWindow", "refresh"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.actionLoad_Backup_File.setText(_translate("MainWindow", "Load Backup File..."))
         self.actionClose.setText(_translate("MainWindow", "Load Backup File..."))
