@@ -27,8 +27,11 @@ class InventoryDB:
     def read_products(self):
         self.cursor.execute("SELECT * FROM product")
         result = self.cursor.fetchall()
+        lista = list()
         for x in result:
-            print(x)
+            lista.append(x)
+        return lista
+
 
     def product_sale(self):
         product_name = input('Producto Vendido: ')
