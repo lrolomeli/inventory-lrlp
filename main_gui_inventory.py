@@ -46,13 +46,42 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         super(MainWindow, self).__init__(parent)
         self.setupUi(self)
         self.inv_db = InventoryDB()
+        self.loadfilters()
         self.show_all_items_in_stock()
         #self.show_items_list()
         self.pushButton.clicked.connect(self.openNewProductDialog)
         self.pushButton_2.clicked.connect(self.openProductSaleDialog)
         self.pushButton_3.clicked.connect(self.refreshProductTableContent)
+        self.product_cmbbox_2.activated.connect(self.refreshFilterView)
         #self.tableWidget.doubleClicked.connect(self.openProductSaleDialog)
 
+
+    def refreshFilterView(self):
+        category = self.product_cmbbox_2.currentText()
+        if category != "ninguno":
+            self.inv_db.get_products_by_category(category)
+        else:
+            self.inv_db.update_product_table()
+        products = self.inv_db.get_product_table()
+        self.tableWidget.setRowCount(len(products))
+        row_index = 0
+        for x in products:
+            self.tableWidget.setItem(row_index,0,QtWidgets.QTableWidgetItem(str(x[0])))
+            self.tableWidget.setItem(row_index,1,QtWidgets.QTableWidgetItem(str(x[1])))
+            self.tableWidget.setItem(row_index,2,QtWidgets.QTableWidgetItem(str(x[2])))
+            self.tableWidget.setItem(row_index,3,QtWidgets.QTableWidgetItem(str(x[4])))
+            self.tableWidget.setItem(row_index,4,QtWidgets.QTableWidgetItem(str(x[5])))
+            self.tableWidget.setItem(row_index,5,QtWidgets.QTableWidgetItem(str(x[3])))
+            self.tableWidget.setItem(row_index,6,QtWidgets.QTableWidgetItem(str(x[6])))
+            row_index += 1
+
+    def loadfilters(self):
+        categories = []
+        category_str = "category"
+        self.inv_db.get_column_no_duplicates(category_str, categories)
+        for category in categories:
+            self.product_cmbbox_2.addItem(category[0])
+        self.product_cmbbox_2.addItem('ninguno')
 
     def add_product(self, product):
         data = (product['name'], product['category'], product['color'], product['location'], product['cost'], product['qty'])
