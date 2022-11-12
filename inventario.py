@@ -1,7 +1,9 @@
 import mysql.connector
 
 class InventoryDB:
+
     def __init__(self):
+        self.product_inventory = []
         self.db = mysql.connector.connect(host="localhost", user="root", password="root")
         self.cursor = self.db.cursor()
         self.create_inventariodb()
@@ -24,11 +26,35 @@ class InventoryDB:
         self.cursor.execute(sql, product_data)
         self.db.commit()
 
-    def read_products(self):
+    def update_product_table(self):
+        self.product_inventory.clear()
         self.cursor.execute("SELECT * FROM product")
         result = self.cursor.fetchall()
         for x in result:
-            print(x)
+            self.product_inventory.append(x)
+
+    def get_filtered_products(self, filter):
+        filter_str = ""
+        while(filter):
+            filterColumn = filter.popitem()
+            filter_str += " && " + filterColumn[0] +"= '"+ filterColumn[1]+"'"
+        self.product_inventory.clear()
+        query = "SELECT * FROM product WHERE qty >= 0"+filter_str
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
+        for x in result:
+            self.product_inventory.append(x)
+
+    def get_column_no_duplicates(self, column_name, column_list):
+        sql = "SELECT "+column_name+" FROM product GROUP BY "+column_name 
+        self.cursor.execute(sql)
+        result = self.cursor.fetchall()
+        for x in result:
+            column_list.append(x)
+
+    def get_product_table(self):
+        return self.product_inventory
+
 
     def product_sale(self):
         product_name = input('Producto Vendido: ')
