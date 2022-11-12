@@ -33,15 +33,6 @@ class InventoryDB:
         for x in result:
             self.product_inventory.append(x)
 
-    def get_products_by_category(self, category):
-        self.product_inventory.clear()
-        sql = "SELECT * FROM product WHERE category = %s"
-        cat = (category, )
-        self.cursor.execute(sql, cat)
-        result = self.cursor.fetchall()
-        for x in result:
-            self.product_inventory.append(x)
-
     def get_filtered_products(self, filter):
         filter_str = ""
         while(filter):
