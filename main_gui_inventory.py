@@ -47,22 +47,34 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.inv_db = InventoryDB()
         self.loadfilters()
-        self.show_all_items_in_stock()
-        #self.show_items_list()
+        self.refreshProductTable()
         self.pushButton.clicked.connect(self.openNewProductDialog)
         self.pushButton_2.clicked.connect(self.openProductSaleDialog)
-        self.pushButton_3.clicked.connect(self.refreshProductTableContent)
-        self.product_cmbbox_2.activated.connect(self.refreshFilterView)
-        #self.tableWidget.doubleClicked.connect(self.openProductSaleDialog)
+        self.pushButton_3.clicked.connect(self.refreshProductTable)
+        self.product_cmbbox_2.activated.connect(self.filterProductTable)
+        self.product_cmbbox.activated.connect(self.filterProductTable)
+        
+        # point to different function that edits the product fields
+        self.tableWidget.doubleClicked.connect(self.openProductSaleDialog)
 
+    def filterProductTable(self):
+        filter = {}
+        if self.product_cmbbox_2.currentIndex():
+            filter['category'] = self.product_cmbbox_2.currentText()
+        if self.product_cmbbox.currentIndex():
+            filter['name'] = self.product_cmbbox.currentText()
+        #...To Be Continue add more filters
+        if filter:
+            print(filter)
+            self.apply_filter(filter)
 
-    def refreshFilterView(self):
-        category = self.product_cmbbox_2.currentText()
-        if category != "ninguno":
-            self.inv_db.get_products_by_category(category)
-        else:
-            self.inv_db.update_product_table()
+    def apply_filter(self, filter):
+        self.inv_db.get_filtered_products(filter)
         products = self.inv_db.get_product_table()
+        # update the other filter comboboxes
+        # for example if filter category is fruta
+        # we will show only products for category
+        # fruta in combobox product to be implemented
         self.tableWidget.setRowCount(len(products))
         row_index = 0
         for x in products:
@@ -76,12 +88,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             row_index += 1
 
     def loadfilters(self):
-        categories = []
-        category_str = "category"
-        self.inv_db.get_column_no_duplicates(category_str, categories)
-        for category in categories:
-            self.product_cmbbox_2.addItem(category[0])
-        self.product_cmbbox_2.addItem('ninguno')
+        self.load_filter("category", self.product_cmbbox_2)
+        self.load_filter("name", self.product_cmbbox)
+
+    def load_filter(self, filterName, combobox):
+        filtered_elements = []
+        self.inv_db.get_column_no_duplicates(filterName, filtered_elements)
+        combobox.addItem('')
+        for filteredElement in filtered_elements:
+            combobox.addItem(filteredElement[0])
+
 
     def add_product(self, product):
         data = (product['name'], product['category'], product['color'], product['location'], product['cost'], product['qty'])
@@ -94,9 +110,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     #    ['location'] = x[4]
     #    ['cost'] = x[5]
     #    ['qty'] = x[6]
-    def refreshProductTableContent(self):
-        # go to db and retrieve data
-        
+    #  go to db and retrieve data
+    def refreshProductTable(self):
         self.inv_db.update_product_table()
         products = self.inv_db.get_product_table()
         self.tableWidget.setRowCount(len(products))
@@ -110,20 +125,6 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.tableWidget.setItem(row_index,5,QtWidgets.QTableWidgetItem(str(x[3])))
             self.tableWidget.setItem(row_index,6,QtWidgets.QTableWidgetItem(str(x[6])))
             row_index += 1
-
-    def show_all_items_in_stock(self):
-        products = list()
-        
-        self.refreshProductTableContent()
-
-    def show_items_list(self):
-        self.inv_db.read_products()
-        entries = ['one','two', 'three']
-        model = QtGui.QStandardItemModel()
-        self.listView.setModel(model)
-        for i in entries:
-            item = QtGui.QStandardItem(i)
-            model.appendRow(item)
 
     def openNewProductDialog(self):
         w = NewProductDialog()

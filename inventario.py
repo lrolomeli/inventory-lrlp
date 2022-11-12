@@ -42,6 +42,18 @@ class InventoryDB:
         for x in result:
             self.product_inventory.append(x)
 
+    def get_filtered_products(self, filter):
+        filter_str = ""
+        while(filter):
+            filterColumn = filter.popitem()
+            filter_str += " && " + filterColumn[0] +"= '"+ filterColumn[1]+"'"
+        self.product_inventory.clear()
+        query = "SELECT * FROM product WHERE qty >= 0"+filter_str
+        self.cursor.execute(query)
+        result = self.cursor.fetchall()
+        for x in result:
+            self.product_inventory.append(x)
+
     def get_column_no_duplicates(self, column_name, column_list):
         sql = "SELECT "+column_name+" FROM product GROUP BY "+column_name 
         self.cursor.execute(sql)
