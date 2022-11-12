@@ -1,81 +1,144 @@
-import mysql.connector
+from PySide2 import QtCore, QtGui, QtWidgets
 
-class InventoryDB:
+from new_product_dialog import Ui_NewProduct
+from sale_dialog import Ui_Dialog
+from mainw_inventario import Ui_MainWindow
+from inventariodb import InventoryDB
 
-    def __init__(self):
-        self.product_inventory = []
-        self.db = mysql.connector.connect(host="localhost", user="root", password="root")
-        self.cursor = self.db.cursor()
-        self.create_inventariodb()
+class ProductSaleDialog(QtWidgets.QDialog, Ui_Dialog):
+    def __init__(self, parent=None):
+        super(ProductSaleDialog, self).__init__(parent)
+        self.setupUi(self)
+        self.pushButton.clicked.connect(self.product_sale)
         
-    def create_inventariodb(self):
-        self.cursor.execute("SHOW DATABASES LIKE 'inventariodb';")
-        row = self.cursor.fetchone()
-        if(row == None):
-            self.cursor.execute("CREATE DATABASE inventariodb;")
-            self.cursor.execute("CREATE TABLE product (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL, category VARCHAR(255), color VARCHAR(255) NOT NULL, location VARCHAR(255), cost int, qty int NOT NULL, UNIQUE (NAME));")
-        else:        
-            self.cursor.execute("USE inventariodb")
-            self.cursor.execute("SHOW TABLES LIKE 'product';")
-            row = self.cursor.fetchone()
-            if(row == None):
-                self.cursor.execute("CREATE TABLE product (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL, category VARCHAR(255), color VARCHAR(255) NOT NULL, location VARCHAR(255), cost int, qty int NOT NULL, UNIQUE (NAME));")   
-    
-    def new_product(self, product_data):
-        sql = "INSERT INTO product (name, category, color, location, cost, qty) VALUES (%s, %s, %s, %s, %s, %s)"
-        self.cursor.execute(sql, product_data)
-        self.db.commit()
-
-    def update_product_table(self):
-        self.product_inventory.clear()
-        self.cursor.execute("SELECT * FROM product")
-        result = self.cursor.fetchall()
-        for x in result:
-            self.product_inventory.append(x)
-
-    def get_filtered_products(self, filter):
-        filter_str = ""
-        while(filter):
-            filterColumn = filter.popitem()
-            filter_str += " && " + filterColumn[0] +"= '"+ filterColumn[1]+"'"
-        self.product_inventory.clear()
-        query = "SELECT * FROM product WHERE qty >= 0"+filter_str
-        self.cursor.execute(query)
-        result = self.cursor.fetchall()
-        for x in result:
-            self.product_inventory.append(x)
-
-    def get_column_no_duplicates(self, column_name, column_list):
-        sql = "SELECT "+column_name+" FROM product GROUP BY "+column_name 
-        self.cursor.execute(sql)
-        result = self.cursor.fetchall()
-        for x in result:
-            column_list.append(x)
-
-    def get_product_table(self):
-        return self.product_inventory
-
-
     def product_sale(self):
-        product_name = input('Producto Vendido: ')
-        qty = int(input('cantidad de ventas: '))
-        name = (product_name,)
+        print("venta")
+        
+class NewProductDialog(QtWidgets.QDialog, Ui_NewProduct):
 
-        sql = "SELECT qty FROM product WHERE name = %s"
-        self.cursor.execute(sql, name)
-        result = self.cursor.fetchone()
-        old_qty = int(result[0])
-        print(old_qty)
-        new_qty = str(old_qty-qty)
-        sql = "UPDATE products SET qty = %s WHERE name = %s"
-        val = (new_qty, product_name)
-        self.cursor.execute(sql, val)
-        self.db.commit()
+    def __init__(self, parent=None):
+        super(NewProductDialog, self).__init__(parent)
+        self.setupUi(self)
+        self.product = {}
+        self.pushButton.clicked.connect(self.read_product)
+        
+    def read_product(self):
+        
+        if(self.lineEdit.text() == None or self.lineEdit_6.text()== None): 
+            return
+        self.product['name'] = self.lineEdit.text()
+        self.product['category'] = self.lineEdit_3.text()
+        self.product['color'] = self.lineEdit_6.text()
+        self.product['location'] = self.lineEdit_5.text()
+        self.product['cost'] = int(self.lineEdit_4.text())
+        self.product['qty'] = int(self.lineEdit_2.text())
+        # SEND EVENT DATA READY TO BE STORED
+        self.close()
+
+    def get_product(self):
+        return self.product
+        
+        
+class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
+    
+
+    def __init__(self, parent=None):
+        super(MainWindow, self).__init__(parent)
+        self.setupUi(self)
+        self.inv_db = InventoryDB()
+        self.loadfilters()
+        self.refreshProductTable()
+        self.pushButton.clicked.connect(self.openNewProductDialog)
+        self.pushButton_2.clicked.connect(self.openProductSaleDialog)
+        self.pushButton_3.clicked.connect(self.refreshProductTable)
+        self.product_cmbbox_2.activated.connect(self.filterProductTable)
+        self.product_cmbbox.activated.connect(self.filterProductTable)
+        
+        # point to different function that edits the product fields
+        self.tableWidget.doubleClicked.connect(self.openProductSaleDialog)
+
+    def filterProductTable(self):
+        filter = {}
+        if self.product_cmbbox_2.currentIndex():
+            filter['category'] = self.product_cmbbox_2.currentText()
+        if self.product_cmbbox.currentIndex():
+            filter['name'] = self.product_cmbbox.currentText()
+        #...To Be Continue add more filters
+        if filter:
+            self.apply_filter(filter)
+
+    def apply_filter(self, filter):
+        self.inv_db.get_filtered_products(filter)
+        products = self.inv_db.get_product_table()
+        # update the other filter comboboxes
+        # for example if filter category is fruta
+        # we will show only products for category
+        # fruta in combobox product to be implemented
+        self.tableWidget.setRowCount(len(products))
+        row_index = 0
+        for x in products:
+            self.tableWidget.setItem(row_index,0,QtWidgets.QTableWidgetItem(str(x[0])))
+            self.tableWidget.setItem(row_index,1,QtWidgets.QTableWidgetItem(str(x[1])))
+            self.tableWidget.setItem(row_index,2,QtWidgets.QTableWidgetItem(str(x[2])))
+            self.tableWidget.setItem(row_index,3,QtWidgets.QTableWidgetItem(str(x[4])))
+            self.tableWidget.setItem(row_index,4,QtWidgets.QTableWidgetItem(str(x[5])))
+            self.tableWidget.setItem(row_index,5,QtWidgets.QTableWidgetItem(str(x[3])))
+            self.tableWidget.setItem(row_index,6,QtWidgets.QTableWidgetItem(str(x[6])))
+            row_index += 1
+
+    def loadfilters(self):
+        self.load_filter("category", self.product_cmbbox_2)
+        self.load_filter("name", self.product_cmbbox)
+
+    def load_filter(self, filterName, combobox):
+        filtered_elements = []
+        self.inv_db.get_column_no_duplicates(filterName, filtered_elements)
+        combobox.addItem('')
+        for filteredElement in filtered_elements:
+            combobox.addItem(filteredElement[0])
 
 
-    def delete_product(self):
-        product_name = input('Ingresa el nombre del producto: ')
-        sql = "DELETE FROM product WHERE name = %s"
-        name = (product_name, )
-        self.cursor.execute(sql, name)
-        self.db.commit()
+    def add_product(self, product):
+        data = (product['name'], product['category'], product['color'], product['location'], product['cost'], product['qty'])
+        self.inv_db.new_product(data)
+
+    #    ['id'] = x[0]
+    #    ['name'] = x[1]
+    #    ['category'] = x[2]
+    #    ['color'] = x[3]
+    #    ['location'] = x[4]
+    #    ['cost'] = x[5]
+    #    ['qty'] = x[6]
+    #  go to db and retrieve data
+    def refreshProductTable(self):
+        self.inv_db.update_product_table()
+        products = self.inv_db.get_product_table()
+        self.tableWidget.setRowCount(len(products))
+        row_index = 0
+        for x in products:
+            self.tableWidget.setItem(row_index,0,QtWidgets.QTableWidgetItem(str(x[0])))
+            self.tableWidget.setItem(row_index,1,QtWidgets.QTableWidgetItem(str(x[1])))
+            self.tableWidget.setItem(row_index,2,QtWidgets.QTableWidgetItem(str(x[2])))
+            self.tableWidget.setItem(row_index,3,QtWidgets.QTableWidgetItem(str(x[4])))
+            self.tableWidget.setItem(row_index,4,QtWidgets.QTableWidgetItem(str(x[5])))
+            self.tableWidget.setItem(row_index,5,QtWidgets.QTableWidgetItem(str(x[3])))
+            self.tableWidget.setItem(row_index,6,QtWidgets.QTableWidgetItem(str(x[6])))
+            row_index += 1
+
+    def openNewProductDialog(self):
+        w = NewProductDialog()
+        w.exec_()
+        new_product = w.get_product()
+        if new_product:
+            self.add_product(new_product)
+        
+    def openProductSaleDialog(self):
+        w = ProductSaleDialog()
+        w.exec_()
+
+if __name__ == '__main__':
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    inventoryWindow = MainWindow()
+    inventoryWindow.show()
+    sys.exit(app.exec_())
