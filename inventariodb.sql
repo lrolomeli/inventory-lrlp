@@ -42,7 +42,7 @@ CREATE TABLE `product` (
   `qty` int NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -51,7 +51,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (1,'manzanas','fruta','rojo','supermercado',10,190),(2,'yadis','tapas','blanco','bodega',1.5,10000),(3,'Peras','fruta','verde','mercado',8,7),(5,'nueces','fruta','cafe','bosque',12,34),(6,'hlkj','hjk','gh','gjh',78,78),(7,'klg','dfx','kghj','cv',54,6),(8,'luis','men','caucasic','here',134568000,2),(9,'hg','hgf','vbn','vh',7,90),(10,'pigmento ','PIGMENTOS','ROJO','B4',450,2);
+INSERT INTO `product` VALUES (1,'manzanas','fruta','rojo','supermercado',10,190),(2,'yadis','tapas','blanco','bodega',1.5,10000),(3,'Peras','fruta','verde','mercado',8,7),(5,'nueces','fruta','cafe','bosque',12,34),(6,'hlkj','hjk','gh','gjh',78,78),(7,'klg','dfx','kghj','cv',54,6),(8,'luis','men','caucasic','here',134568000,2),(9,'hg','hgf','vbn','vh',7,90),(10,'pigmento ','PIGMENTOS','ROJO','B4',450,2),(11,'asdf','asdf','sdvf','csad',34,23);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -64,4 +64,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-12 11:30:34
+-- Dump completed on 2022-11-13 22:27:14
