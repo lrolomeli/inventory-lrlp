@@ -3,11 +3,24 @@ import mysql.connector
 class InventoryDB:
 
     def __init__(self):
-        self.product_inventory = []
         self.db = mysql.connector.connect(host="localhost", user="root", password="root")
+        self.product_inventory = []
         self.cursor = self.db.cursor()
-        self.create_inventariodb()
-        
+        #self.create_inventariodb()
+
+    def use_inventariodb(self):
+        self.cursor.execute("SHOW DATABASES LIKE 'inventariodb';")
+        row = self.cursor.fetchone()
+        if(row == None):
+            return 0
+        else:
+            self.cursor.execute("USE inventariodb")
+            return 1
+            
+    def connect_to_database(self):
+        self.db = mysql.connector.connect(host="localhost", user="root", password="root", database="inventariodb")
+        self.cursor = self.db.cursor()
+
     def create_inventariodb(self):
         self.cursor.execute("SHOW DATABASES LIKE 'inventariodb';")
         row = self.cursor.fetchone()
