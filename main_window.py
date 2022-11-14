@@ -139,8 +139,8 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "CANTIDAD"))
         self.pushButton_3.setText(_translate("MainWindow", "refresh"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
-        self.actionLoad_Backup_File.setText(_translate("MainWindow", "Load Backup File..."))
-        self.actionClose.setText(_translate("MainWindow", "Load Backup File..."))
+        self.actionLoad_Backup_File.setText(_translate("MainWindow", "Abrir Archivo de Inventario..."))
+        self.actionClose.setText(_translate("MainWindow", "Generar Respaldo de Inventario..."))
         self.actionClose_2.setText(_translate("MainWindow", "Close"))
 
 

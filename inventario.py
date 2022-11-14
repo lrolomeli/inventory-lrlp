@@ -4,6 +4,7 @@ from new_product_dialog import Ui_NewProduct
 from sale_dialog import Ui_Dialog
 from main_window import Ui_MainWindow
 from inventariodb import InventoryDB
+from datetime import datetime
 import os
 
 
@@ -54,6 +55,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.product_cmbbox_2.activated.connect(self.filterProductTable)
         self.product_cmbbox.activated.connect(self.filterProductTable)
         self.actionLoad_Backup_File.triggered.connect(self.load_backup_file)
+        self.actionClose.triggered.connect(self.generate_backup_file)
 
         # point to different function that edits the product fields
         self.tableWidget.doubleClicked.connect(self.openProductSaleDialog)
@@ -81,6 +83,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.loadfilters()
             self.refreshProductTable()
 
+    def generate_backup_file(self):
+        cmd = 'mysqldump -u root --add-drop-database --databases inventariodb > ~/Documents/Projects/Programming/inventory/inventariodb.sql'
+        os.system(cmd)
+        os.system('git add inventariodb.sql')
+        date = datetime.now().strftime('%d/%m/%Y-%H:%M:%S')
+        #os.system('git commit -m '+"\""+date+"\"")
 
     def filterProductTable(self):
         filter = {}
