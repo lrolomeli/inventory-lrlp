@@ -59,6 +59,7 @@ class InventoryDB:
             self.product_inventory.append(x)
 
     def get_column_no_duplicates(self, column_name, column_list):
+        # TO DO: add where categoria = 'fruta' 
         sql = "SELECT "+column_name+" FROM product GROUP BY "+column_name 
         self.cursor.execute(sql)
         result = self.cursor.fetchall()

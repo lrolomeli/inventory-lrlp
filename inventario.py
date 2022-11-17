@@ -52,7 +52,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.pushButton.clicked.connect(self.openNewProductDialog)
         self.pushButton_2.clicked.connect(self.openProductSaleDialog)
         self.pushButton_3.clicked.connect(self.refreshProductTable)
-        self.product_cmbbox_2.activated.connect(self.filterProductTable)
+
+        self.product_cmbbox_2.activated.connect(self.filterProductTable)        
         self.product_cmbbox.activated.connect(self.filterProductTable)
         self.actionLoad_Backup_File.triggered.connect(self.load_backup_file)
         self.actionClose.triggered.connect(self.generate_backup_file)
@@ -71,6 +72,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             except:
                 print("No se encontro la base de datos")
             else:
+                self.loadfilters()
                 self.refreshProductTable()
 
     def load_backup_file(self):
