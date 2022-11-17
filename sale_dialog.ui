@@ -1,24 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>sale_dialog</class>
+ <widget class="QDialog" name="sale_dialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>500</width>
+    <height>200</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>Dialog</string>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox">
+  <property name="minimumSize">
+   <size>
+    <width>500</width>
+    <height>200</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>500</width>
+    <height>200</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Salidas</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(160, 160, 160);
+font: 75 10pt &quot;MS Shell Dlg 2&quot;;</string>
+  </property>
+  <widget class="QDialogButtonBox" name="cancel_btn">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>230</y>
-     <width>341</width>
+     <x>190</x>
+     <y>160</y>
+     <width>101</width>
      <height>32</height>
     </rect>
    </property>
@@ -29,121 +51,116 @@
     <set>QDialogButtonBox::Cancel</set>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QWidget" name="formLayoutWidget">
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>40</y>
-     <width>55</width>
-     <height>16</height>
+     <y>30</y>
+     <width>251</width>
+     <height>101</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Producto</string>
-   </property>
+   <layout class="QFormLayout" name="product_form_layout">
+    <item row="0" column="0">
+     <widget class="QLabel" name="product_label">
+      <property name="text">
+       <string>Producto</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLineEdit" name="product_txtedit">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLineEdit" name="qty_txtedit">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="location_label">
+      <property name="text">
+       <string>Ubicacion</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QComboBox" name="location_filter_cb"/>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="qty_label">
+      <property name="text">
+       <string>Cantidad</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>110</x>
-     <y>40</y>
-     <width>113</width>
-     <height>22</height>
+     <x>310</x>
+     <y>30</y>
+     <width>160</width>
+     <height>106</height>
     </rect>
    </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>80</y>
-     <width>55</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Ubicacion</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_2">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>80</y>
-     <width>113</width>
-     <height>22</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>120</y>
-     <width>55</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Cantidad</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_3">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>120</y>
-     <width>113</width>
-     <height>22</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton">
-   <property name="geometry">
-    <rect>
-     <x>270</x>
-     <y>150</y>
-     <width>93</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Ver Carrito</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_2">
-   <property name="geometry">
-    <rect>
-     <x>250</x>
-     <y>60</y>
-     <width>121</width>
-     <height>61</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Agregar Al carrito</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_3">
-   <property name="geometry">
-    <rect>
-     <x>270</x>
-     <y>190</y>
-     <width>93</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Vender</string>
-   </property>
+   <layout class="QVBoxLayout" name="cart_buttons">
+    <item>
+     <widget class="QPushButton" name="addBasket_btn">
+      <property name="text">
+       <string>Añadir al Carrito</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>images/add2cart.png</normaloff>images/add2cart.png</iconset>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="watchBasket_btn">
+      <property name="text">
+       <string>Ver Carrito</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>images/cart.png</normaloff>images/cart.png</iconset>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="sale_btn">
+      <property name="text">
+       <string>Confirmar Salida</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>
  <connections>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>cancel_btn</sender>
    <signal>accepted()</signal>
-   <receiver>Dialog</receiver>
+   <receiver>sale_dialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -157,9 +174,9 @@
    </hints>
   </connection>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>cancel_btn</sender>
    <signal>rejected()</signal>
-   <receiver>Dialog</receiver>
+   <receiver>sale_dialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

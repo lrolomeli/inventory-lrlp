@@ -12,7 +12,13 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>693</width>
+    <width>814</width>
+    <height>592</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>814</width>
     <height>592</height>
    </size>
   </property>
@@ -30,7 +36,7 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(221, 221, 221);
+   <string notr="true">background-color: rgb(160, 160, 160);
 alternate-background-color: rgb(174, 182, 255);</string>
   </property>
   <property name="iconSize">
@@ -46,12 +52,12 @@ alternate-background-color: rgb(174, 182, 255);</string>
    <bool>false</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QComboBox" name="product_cmbbox">
+   <widget class="QComboBox" name="product_filter_cb">
     <property name="geometry">
      <rect>
-      <x>270</x>
+      <x>400</x>
       <y>50</y>
-      <width>81</width>
+      <width>161</width>
       <height>22</height>
      </rect>
     </property>
@@ -59,11 +65,14 @@ alternate-background-color: rgb(174, 182, 255);</string>
    <widget class="QLabel" name="product_label">
     <property name="geometry">
      <rect>
-      <x>200</x>
+      <x>320</x>
       <y>50</y>
-      <width>55</width>
-      <height>16</height>
+      <width>71</width>
+      <height>20</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 10pt &quot;MS Shell Dlg 2&quot;;</string>
     </property>
     <property name="text">
      <string>Producto</string>
@@ -74,19 +83,19 @@ alternate-background-color: rgb(174, 182, 255);</string>
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>151</width>
+      <width>275</width>
       <height>81</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QHBoxLayout" name="operations_layout">
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="new_item_btn">
        <property name="text">
         <string/>
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>images/new_product.png</normaloff>images/new_product.png</iconset>
+         <normaloff>images/new_item.png</normaloff>images/new_item.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -103,13 +112,59 @@ alternate-background-color: rgb(174, 182, 255);</string>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="outcome_btn">
        <property name="text">
         <string/>
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>images/sale_product.png</normaloff>images/sale_product.png</iconset>
+         <normaloff>images/sale.png</normaloff>images/sale.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>50</width>
+         <height>50</height>
+        </size>
+       </property>
+       <property name="autoDefault">
+        <bool>true</bool>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="income_btn">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>images/updating.png</normaloff>images/updating.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>50</width>
+         <height>50</height>
+        </size>
+       </property>
+       <property name="autoDefault">
+        <bool>true</bool>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="game_btn">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>images/game.png</normaloff>images/game.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -130,40 +185,46 @@ alternate-background-color: rgb(174, 182, 255);</string>
    <widget class="QLabel" name="category_label">
     <property name="geometry">
      <rect>
-      <x>200</x>
+      <x>320</x>
       <y>10</y>
-      <width>55</width>
-      <height>16</height>
+      <width>81</width>
+      <height>20</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 10pt &quot;MS Shell Dlg 2&quot;;</string>
     </property>
     <property name="text">
      <string>Categoria</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="product_cmbbox_2">
+   <widget class="QComboBox" name="category_filter_cb">
     <property name="geometry">
      <rect>
-      <x>270</x>
+      <x>400</x>
       <y>10</y>
-      <width>81</width>
+      <width>161</width>
       <height>22</height>
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="product_searchbox">
     <property name="geometry">
      <rect>
-      <x>660</x>
+      <x>622</x>
       <y>20</y>
-      <width>113</width>
-      <height>22</height>
+      <width>151</width>
+      <height>41</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 10pt &quot;MS Shell Dlg 2&quot;;</string>
     </property>
     <property name="text">
      <string>Buscar Producto</string>
     </property>
    </widget>
-   <widget class="QTableWidget" name="tableWidget">
+   <widget class="QTableWidget" name="inventory_table">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -172,11 +233,6 @@ alternate-background-color: rgb(174, 182, 255);</string>
       <height>381</height>
      </rect>
     </property>
-    <column>
-     <property name="text">
-      <string>ID</string>
-     </property>
-    </column>
     <column>
      <property name="text">
       <string>NOMBRE</string>
@@ -189,7 +245,12 @@ alternate-background-color: rgb(174, 182, 255);</string>
     </column>
     <column>
      <property name="text">
-      <string>UBICACION</string>
+      <string>COLOR</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>CANTIDAD</string>
      </property>
     </column>
     <column>
@@ -199,22 +260,9 @@ alternate-background-color: rgb(174, 182, 255);</string>
     </column>
     <column>
      <property name="text">
-      <string>COLOR</string>
+      <string>UBICACION</string>
      </property>
     </column>
-   </widget>
-   <widget class="QPushButton" name="pushButton_3">
-    <property name="geometry">
-     <rect>
-      <x>660</x>
-      <y>60</y>
-      <width>93</width>
-      <height>28</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>PushButton</string>
-    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -228,30 +276,30 @@ alternate-background-color: rgb(174, 182, 255);</string>
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>File</string>
+     <string>Archivo</string>
     </property>
-    <addaction name="actionLoad_Backup_File"/>
+    <addaction name="actionLoadBackupFile"/>
+    <addaction name="separator"/>
+    <addaction name="actionGenBackupFile"/>
     <addaction name="separator"/>
     <addaction name="actionClose"/>
-    <addaction name="separator"/>
-    <addaction name="actionClose_2"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionLoad_Backup_File">
+  <action name="actionLoadBackupFile">
    <property name="text">
-    <string>Load Backup File...</string>
+    <string>Abrir Archivo de Inventario...</string>
+   </property>
+  </action>
+  <action name="actionGenBackupFile">
+   <property name="text">
+    <string>Generar Respaldo de Inventario...</string>
    </property>
   </action>
   <action name="actionClose">
    <property name="text">
-    <string>Load Backup File...</string>
-   </property>
-  </action>
-  <action name="actionClose_2">
-   <property name="text">
-    <string>Close</string>
+    <string>Cerrar</string>
    </property>
   </action>
  </widget>

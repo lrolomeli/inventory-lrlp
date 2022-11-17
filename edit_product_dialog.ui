@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>643</width>
+    <width>684</width>
     <height>302</height>
    </rect>
   </property>
@@ -16,23 +16,6 @@
   <property name="styleSheet">
    <string notr="true">background-color: rgb(160, 160, 160);</string>
   </property>
-  <widget class="QPushButton" name="add_product_btn">
-   <property name="geometry">
-    <rect>
-     <x>480</x>
-     <y>110</y>
-     <width>121</width>
-     <height>71</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Agregar</string>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>images/add_product.png</normaloff>images/add_product.png</iconset>
-   </property>
-  </widget>
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
@@ -120,22 +103,31 @@
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);</string>
       </property>
+      <property name="readOnly">
+       <bool>false</bool>
+      </property>
      </widget>
     </item>
     <item>
      <widget class="QLineEdit" name="quantity_txtedit">
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);</string>
+       <string notr="true">background-color: rgb(217, 217, 217);</string>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QLineEdit" name="category_txtedit">
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);</string>
+       <string notr="true">background-color: rgb(217, 217, 217);</string>
       </property>
       <property name="text">
        <string/>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
     </item>
@@ -162,10 +154,72 @@
     <item>
      <widget class="QLineEdit" name="color_txtedit">
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);</string>
+       <string notr="true">background-color: rgb(217, 217, 217);</string>
       </property>
       <property name="text">
        <string/>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget_3">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>50</y>
+     <width>232</width>
+     <height>191</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QPushButton" name="update_product_btn">
+      <property name="text">
+       <string>ACTUALIZAR</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>images/updates.png</normaloff>images/updates.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="erase_btn">
+      <property name="text">
+       <string>BORRAR PRODUCTO</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>images/delete.png</normaloff>images/delete.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="cancel_btn">
+      <property name="text">
+       <string>CANCELAR</string>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>100</width>
+        <height>100</height>
+       </size>
       </property>
      </widget>
     </item>

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'new_product_dialogRgbTiG.ui'
+## Form generated from reading UI file 'edit_product_dialogbntbTM.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -17,14 +17,8 @@ class Ui_NewProduct(object):
     def setupUi(self, NewProduct):
         if not NewProduct.objectName():
             NewProduct.setObjectName(u"NewProduct")
-        NewProduct.resize(643, 302)
+        NewProduct.resize(684, 302)
         NewProduct.setStyleSheet(u"background-color: rgb(160, 160, 160);")
-        self.add_product_btn = QPushButton(NewProduct)
-        self.add_product_btn.setObjectName(u"add_product_btn")
-        self.add_product_btn.setGeometry(QRect(480, 110, 121, 71))
-        icon = QIcon()
-        icon.addFile(u"images/add_product.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.add_product_btn.setIcon(icon)
         self.verticalLayoutWidget = QWidget(NewProduct)
         self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
         self.verticalLayoutWidget.setGeometry(QRect(20, 20, 160, 271))
@@ -76,18 +70,21 @@ class Ui_NewProduct(object):
         self.name_txtedit = QLineEdit(self.verticalLayoutWidget_2)
         self.name_txtedit.setObjectName(u"name_txtedit")
         self.name_txtedit.setStyleSheet(u"background-color: rgb(255, 255, 255);")
+        self.name_txtedit.setReadOnly(False)
 
         self.txtedit_layout.addWidget(self.name_txtedit)
 
         self.quantity_txtedit = QLineEdit(self.verticalLayoutWidget_2)
         self.quantity_txtedit.setObjectName(u"quantity_txtedit")
-        self.quantity_txtedit.setStyleSheet(u"background-color: rgb(255, 255, 255);")
+        self.quantity_txtedit.setStyleSheet(u"background-color: rgb(217, 217, 217);")
+        self.quantity_txtedit.setReadOnly(True)
 
         self.txtedit_layout.addWidget(self.quantity_txtedit)
 
         self.category_txtedit = QLineEdit(self.verticalLayoutWidget_2)
         self.category_txtedit.setObjectName(u"category_txtedit")
-        self.category_txtedit.setStyleSheet(u"background-color: rgb(255, 255, 255);")
+        self.category_txtedit.setStyleSheet(u"background-color: rgb(217, 217, 217);")
+        self.category_txtedit.setReadOnly(True)
 
         self.txtedit_layout.addWidget(self.category_txtedit)
 
@@ -105,9 +102,40 @@ class Ui_NewProduct(object):
 
         self.color_txtedit = QLineEdit(self.verticalLayoutWidget_2)
         self.color_txtedit.setObjectName(u"color_txtedit")
-        self.color_txtedit.setStyleSheet(u"background-color: rgb(255, 255, 255);")
+        self.color_txtedit.setStyleSheet(u"background-color: rgb(217, 217, 217);")
+        self.color_txtedit.setReadOnly(True)
 
         self.txtedit_layout.addWidget(self.color_txtedit)
+
+        self.verticalLayoutWidget_3 = QWidget(NewProduct)
+        self.verticalLayoutWidget_3.setObjectName(u"verticalLayoutWidget_3")
+        self.verticalLayoutWidget_3.setGeometry(QRect(440, 50, 232, 191))
+        self.verticalLayout = QVBoxLayout(self.verticalLayoutWidget_3)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.update_product_btn = QPushButton(self.verticalLayoutWidget_3)
+        self.update_product_btn.setObjectName(u"update_product_btn")
+        icon = QIcon()
+        icon.addFile(u"images/updates.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.update_product_btn.setIcon(icon)
+        self.update_product_btn.setIconSize(QSize(20, 20))
+
+        self.verticalLayout.addWidget(self.update_product_btn)
+
+        self.erase_btn = QPushButton(self.verticalLayoutWidget_3)
+        self.erase_btn.setObjectName(u"erase_btn")
+        icon1 = QIcon()
+        icon1.addFile(u"images/delete.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.erase_btn.setIcon(icon1)
+        self.erase_btn.setIconSize(QSize(20, 20))
+
+        self.verticalLayout.addWidget(self.erase_btn)
+
+        self.cancel_btn = QPushButton(self.verticalLayoutWidget_3)
+        self.cancel_btn.setObjectName(u"cancel_btn")
+        self.cancel_btn.setIconSize(QSize(100, 100))
+
+        self.verticalLayout.addWidget(self.cancel_btn)
 
 
         self.retranslateUi(NewProduct)
@@ -117,7 +145,6 @@ class Ui_NewProduct(object):
 
     def retranslateUi(self, NewProduct):
         NewProduct.setWindowTitle(QCoreApplication.translate("NewProduct", u"A\u00f1adir Nuevo Producto", None))
-        self.add_product_btn.setText(QCoreApplication.translate("NewProduct", u"Agregar", None))
         self.name_label.setText(QCoreApplication.translate("NewProduct", u"Nombre", None))
         self.quantity_label.setText(QCoreApplication.translate("NewProduct", u"Cantidad", None))
         self.category_label.setText(QCoreApplication.translate("NewProduct", u"Categoria", None))
@@ -128,5 +155,8 @@ class Ui_NewProduct(object):
         self.cost_txtedit.setText("")
         self.location_txtedit.setText("")
         self.color_txtedit.setText("")
+        self.update_product_btn.setText(QCoreApplication.translate("NewProduct", u"ACTUALIZAR", None))
+        self.erase_btn.setText(QCoreApplication.translate("NewProduct", u"BORRAR PRODUCTO", None))
+        self.cancel_btn.setText(QCoreApplication.translate("NewProduct", u"CANCELAR", None))
     # retranslateUi
 
