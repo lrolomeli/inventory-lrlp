@@ -13,7 +13,7 @@ class ProductSaleDialog(QtWidgets.QDialog, Ui_sale_dialog):
     def __init__(self, parent=None):
         super(ProductSaleDialog, self).__init__(parent)
         self.setupUi(self)
-        self.pushButton.clicked.connect(self.product_sale)
+        self.sale_btn.clicked.connect(self.product_sale)
 
     def product_sale(self):
         print("venta")
@@ -66,6 +66,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setupDBConnection()
         self.new_item_btn.clicked.connect(self.openNewProductDialog)
         self.outcome_btn.clicked.connect(self.openProductSaleDialog)
+        self.income_btn.clicked.connect(self.openEditProductDialog)
 
         self.category_filter_cb.activated.connect(self.filterProductTable)        
         self.product_filter_cb.activated.connect(self.filterProductTable)
@@ -190,6 +191,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         new_product = w.get_product()
         if new_product:
             self.add_product(new_product)
+
+    def openEditProductDialog(self):
+        w = EditProductDialog()
+        w.exec_()
 
     def openProductSaleDialog(self):
         w = ProductSaleDialog()
