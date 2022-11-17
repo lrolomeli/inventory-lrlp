@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'edit_product_dialogtKBNQy.ui'
+## Form generated from reading UI file 'edit_product_dialogrUQkFL.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -131,11 +131,14 @@ class Ui_editProduct(object):
 
         self.verticalLayout.addWidget(self.erase_btn)
 
-        self.cancel_btn = QPushButton(self.verticalLayoutWidget_3)
-        self.cancel_btn.setObjectName(u"cancel_btn")
-        self.cancel_btn.setIconSize(QSize(100, 100))
+        self.buttonBox = QDialogButtonBox(self.verticalLayoutWidget_3)
+        self.buttonBox.setObjectName(u"buttonBox")
+        self.buttonBox.setLayoutDirection(Qt.LeftToRight)
+        self.buttonBox.setOrientation(Qt.Horizontal)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel)
+        self.buttonBox.setCenterButtons(True)
 
-        self.verticalLayout.addWidget(self.cancel_btn)
+        self.verticalLayout.addWidget(self.buttonBox)
 
 
         self.retranslateUi(editProduct)
@@ -157,6 +160,5 @@ class Ui_editProduct(object):
         self.color_txtedit.setText("")
         self.update_product_btn.setText(QCoreApplication.translate("editProduct", u"ACTUALIZAR", None))
         self.erase_btn.setText(QCoreApplication.translate("editProduct", u"BORRAR PRODUCTO", None))
-        self.cancel_btn.setText(QCoreApplication.translate("editProduct", u"CANCELAR", None))
     # retranslateUi
 

@@ -211,15 +211,18 @@
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="cancel_btn">
-      <property name="text">
-       <string>CANCELAR</string>
+     <widget class="QDialogButtonBox" name="buttonBox">
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
       </property>
-      <property name="iconSize">
-       <size>
-        <width>100</width>
-        <height>100</height>
-       </size>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="standardButtons">
+       <set>QDialogButtonBox::Cancel</set>
+      </property>
+      <property name="centerButtons">
+       <bool>true</bool>
       </property>
      </widget>
     </item>

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'new_product_dialogrAyXgy.ui'
+## Form generated from reading UI file 'new_product_dialogGJZJNi.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -109,6 +109,11 @@ class Ui_NewProduct(object):
 
         self.txtedit_layout.addWidget(self.color_txtedit)
 
+        self.buttonBox = QDialogButtonBox(NewProduct)
+        self.buttonBox.setObjectName(u"buttonBox")
+        self.buttonBox.setGeometry(QRect(450, 220, 193, 28))
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel)
+        self.buttonBox.setCenterButtons(True)
 
         self.retranslateUi(NewProduct)
 
