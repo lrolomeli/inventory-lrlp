@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'edit_product_dialogbntbTM.ui'
+## Form generated from reading UI file 'edit_product_dialogtKBNQy.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -13,13 +13,13 @@ from PySide2.QtGui import *
 from PySide2.QtWidgets import *
 
 
-class Ui_NewProduct(object):
-    def setupUi(self, NewProduct):
-        if not NewProduct.objectName():
-            NewProduct.setObjectName(u"NewProduct")
-        NewProduct.resize(684, 302)
-        NewProduct.setStyleSheet(u"background-color: rgb(160, 160, 160);")
-        self.verticalLayoutWidget = QWidget(NewProduct)
+class Ui_editProduct(object):
+    def setupUi(self, editProduct):
+        if not editProduct.objectName():
+            editProduct.setObjectName(u"editProduct")
+        editProduct.resize(684, 302)
+        editProduct.setStyleSheet(u"background-color: rgb(160, 160, 160);")
+        self.verticalLayoutWidget = QWidget(editProduct)
         self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
         self.verticalLayoutWidget.setGeometry(QRect(20, 20, 160, 271))
         self.label_layout = QVBoxLayout(self.verticalLayoutWidget)
@@ -61,7 +61,7 @@ class Ui_NewProduct(object):
 
         self.label_layout.addWidget(self.color_label)
 
-        self.verticalLayoutWidget_2 = QWidget(NewProduct)
+        self.verticalLayoutWidget_2 = QWidget(editProduct)
         self.verticalLayoutWidget_2.setObjectName(u"verticalLayoutWidget_2")
         self.verticalLayoutWidget_2.setGeometry(QRect(179, 20, 251, 271))
         self.txtedit_layout = QVBoxLayout(self.verticalLayoutWidget_2)
@@ -107,7 +107,7 @@ class Ui_NewProduct(object):
 
         self.txtedit_layout.addWidget(self.color_txtedit)
 
-        self.verticalLayoutWidget_3 = QWidget(NewProduct)
+        self.verticalLayoutWidget_3 = QWidget(editProduct)
         self.verticalLayoutWidget_3.setObjectName(u"verticalLayoutWidget_3")
         self.verticalLayoutWidget_3.setGeometry(QRect(440, 50, 232, 191))
         self.verticalLayout = QVBoxLayout(self.verticalLayoutWidget_3)
@@ -138,25 +138,25 @@ class Ui_NewProduct(object):
         self.verticalLayout.addWidget(self.cancel_btn)
 
 
-        self.retranslateUi(NewProduct)
+        self.retranslateUi(editProduct)
 
-        QMetaObject.connectSlotsByName(NewProduct)
+        QMetaObject.connectSlotsByName(editProduct)
     # setupUi
 
-    def retranslateUi(self, NewProduct):
-        NewProduct.setWindowTitle(QCoreApplication.translate("NewProduct", u"A\u00f1adir Nuevo Producto", None))
-        self.name_label.setText(QCoreApplication.translate("NewProduct", u"Nombre", None))
-        self.quantity_label.setText(QCoreApplication.translate("NewProduct", u"Cantidad", None))
-        self.category_label.setText(QCoreApplication.translate("NewProduct", u"Categoria", None))
-        self.cost_label.setText(QCoreApplication.translate("NewProduct", u"Costo", None))
-        self.location_label.setText(QCoreApplication.translate("NewProduct", u"Ubicacion", None))
-        self.color_label.setText(QCoreApplication.translate("NewProduct", u"Color", None))
+    def retranslateUi(self, editProduct):
+        editProduct.setWindowTitle(QCoreApplication.translate("editProduct", u"A\u00f1adir Nuevo Producto", None))
+        self.name_label.setText(QCoreApplication.translate("editProduct", u"Nombre", None))
+        self.quantity_label.setText(QCoreApplication.translate("editProduct", u"Cantidad", None))
+        self.category_label.setText(QCoreApplication.translate("editProduct", u"Categoria", None))
+        self.cost_label.setText(QCoreApplication.translate("editProduct", u"Costo", None))
+        self.location_label.setText(QCoreApplication.translate("editProduct", u"Ubicacion", None))
+        self.color_label.setText(QCoreApplication.translate("editProduct", u"Color", None))
         self.category_txtedit.setText("")
         self.cost_txtedit.setText("")
         self.location_txtedit.setText("")
         self.color_txtedit.setText("")
-        self.update_product_btn.setText(QCoreApplication.translate("NewProduct", u"ACTUALIZAR", None))
-        self.erase_btn.setText(QCoreApplication.translate("NewProduct", u"BORRAR PRODUCTO", None))
-        self.cancel_btn.setText(QCoreApplication.translate("NewProduct", u"CANCELAR", None))
+        self.update_product_btn.setText(QCoreApplication.translate("editProduct", u"ACTUALIZAR", None))
+        self.erase_btn.setText(QCoreApplication.translate("editProduct", u"BORRAR PRODUCTO", None))
+        self.cancel_btn.setText(QCoreApplication.translate("editProduct", u"CANCELAR", None))
     # retranslateUi
 

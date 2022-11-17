@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'new_product_dialogRgbTiG.ui'
+## Form generated from reading UI file 'new_product_dialogrAyXgy.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -37,11 +37,11 @@ class Ui_NewProduct(object):
 
         self.label_layout.addWidget(self.name_label)
 
-        self.quantity_label = QLabel(self.verticalLayoutWidget)
-        self.quantity_label.setObjectName(u"quantity_label")
-        self.quantity_label.setStyleSheet(u"font: 75 10pt \"MS Shell Dlg 2\";")
+        self.qty_label = QLabel(self.verticalLayoutWidget)
+        self.qty_label.setObjectName(u"qty_label")
+        self.qty_label.setStyleSheet(u"font: 75 10pt \"MS Shell Dlg 2\";")
 
-        self.label_layout.addWidget(self.quantity_label)
+        self.label_layout.addWidget(self.qty_label)
 
         self.category_label = QLabel(self.verticalLayoutWidget)
         self.category_label.setObjectName(u"category_label")
@@ -79,11 +79,11 @@ class Ui_NewProduct(object):
 
         self.txtedit_layout.addWidget(self.name_txtedit)
 
-        self.quantity_txtedit = QLineEdit(self.verticalLayoutWidget_2)
-        self.quantity_txtedit.setObjectName(u"quantity_txtedit")
-        self.quantity_txtedit.setStyleSheet(u"background-color: rgb(255, 255, 255);")
+        self.qty_txtedit = QLineEdit(self.verticalLayoutWidget_2)
+        self.qty_txtedit.setObjectName(u"qty_txtedit")
+        self.qty_txtedit.setStyleSheet(u"background-color: rgb(255, 255, 255);")
 
-        self.txtedit_layout.addWidget(self.quantity_txtedit)
+        self.txtedit_layout.addWidget(self.qty_txtedit)
 
         self.category_txtedit = QLineEdit(self.verticalLayoutWidget_2)
         self.category_txtedit.setObjectName(u"category_txtedit")
@@ -119,7 +119,7 @@ class Ui_NewProduct(object):
         NewProduct.setWindowTitle(QCoreApplication.translate("NewProduct", u"A\u00f1adir Nuevo Producto", None))
         self.add_product_btn.setText(QCoreApplication.translate("NewProduct", u"Agregar", None))
         self.name_label.setText(QCoreApplication.translate("NewProduct", u"Nombre", None))
-        self.quantity_label.setText(QCoreApplication.translate("NewProduct", u"Cantidad", None))
+        self.qty_label.setText(QCoreApplication.translate("NewProduct", u"Cantidad", None))
         self.category_label.setText(QCoreApplication.translate("NewProduct", u"Categoria", None))
         self.cost_label.setText(QCoreApplication.translate("NewProduct", u"Costo", None))
         self.location_label.setText(QCoreApplication.translate("NewProduct", u"Ubicacion", None))
