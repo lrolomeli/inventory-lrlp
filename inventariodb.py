@@ -57,6 +57,8 @@ class InventoryDB:
         result = self.cursor.fetchall()
         for x in result:
             self.product_inventory.append(x)
+        
+        return self.product_inventory
 
     def get_column_no_duplicates(self, column_name, column_list):
         # TO DO: add where categoria = 'fruta' 
@@ -65,9 +67,6 @@ class InventoryDB:
         result = self.cursor.fetchall()
         for x in result:
             column_list.append(x)
-
-    def get_product_table(self):
-        return self.product_inventory
 
 
     def product_sale(self):
