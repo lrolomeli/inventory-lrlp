@@ -6,7 +6,10 @@ class InventoryDB:
         self.db = mysql.connector.connect(host="localhost", user="root", password="root")
         self.product_inventory = []
         self.cursor = self.db.cursor()
-        #self.create_inventariodb()
+        # Si no existe conexion a la base de datos
+        # 
+
+        # self.create_inventariodb()
 
     def use_inventariodb(self):
         self.cursor.execute("SHOW DATABASES LIKE 'inventariodb';")
@@ -21,44 +24,28 @@ class InventoryDB:
         self.db = mysql.connector.connect(host="localhost", user="root", password="root", database="inventariodb")
         self.cursor = self.db.cursor()
 
-    def create_inventariodb(self):
-        self.cursor.execute("SHOW DATABASES LIKE 'inventariodb';")
-        row = self.cursor.fetchone()
-        if(row == None):
-            self.cursor.execute("CREATE DATABASE inventariodb;")
-            self.cursor.execute("CREATE TABLE product (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL, category VARCHAR(255), color VARCHAR(255) NOT NULL, location VARCHAR(255), cost int, qty int NOT NULL, UNIQUE (NAME));")
-        else:        
-            self.cursor.execute("USE inventariodb")
-            self.cursor.execute("SHOW TABLES LIKE 'product';")
-            row = self.cursor.fetchone()
-            if(row == None):
-                self.cursor.execute("CREATE TABLE product (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL, category VARCHAR(255), color VARCHAR(255) NOT NULL, location VARCHAR(255), cost int, qty int NOT NULL, UNIQUE (NAME));")   
-    
     def new_product(self, product_data):
         sql = "INSERT INTO product (name, category, color, location, cost, qty) VALUES (%s, %s, %s, %s, %s, %s)"
         self.cursor.execute(sql, product_data)
         self.db.commit()
 
-    def update_product_table(self):
-        self.product_inventory.clear()
+    def update_product_table(self, products):
         self.cursor.execute("SELECT * FROM product")
         result = self.cursor.fetchall()
         for x in result:
-            self.product_inventory.append(x)
+            products.append(x)
 
-    def get_filtered_products(self, filter):
+    def get_filtered_products(self, filter, products):
         filter_str = ""
-        while(filter):
-            filterColumn = filter.popitem()
-            filter_str += " && " + filterColumn[0] +"= '"+ filterColumn[1]+"'"
-        self.product_inventory.clear()
+        # Revisaremos cada elemento del diccionario y su valor
+        for column in filter:
+            filter_str += " && " + column +"= '"+ filter[column]+"'"
+
         query = "SELECT * FROM product WHERE qty >= 0"+filter_str
         self.cursor.execute(query)
         result = self.cursor.fetchall()
         for x in result:
-            self.product_inventory.append(x)
-        
-        return self.product_inventory
+            products.append(x)
 
     def get_column_no_duplicates(self, column_name, column_list):
         # TO DO: add where categoria = 'fruta' 
@@ -69,26 +56,25 @@ class InventoryDB:
             column_list.append(x)
 
 
-    def product_sale(self):
-        product_name = input('Producto Vendido: ')
-        qty = int(input('cantidad de ventas: '))
-        name = (product_name,)
+    def product_sale(self, productName, qty):
+        # arguments
+        # product_name
+        element_list = (productName,)
 
         sql = "SELECT qty FROM product WHERE name = %s"
-        self.cursor.execute(sql, name)
+        self.cursor.execute(sql, element_list)
         result = self.cursor.fetchone()
         old_qty = int(result[0])
         print(old_qty)
         new_qty = str(old_qty-qty)
         sql = "UPDATE products SET qty = %s WHERE name = %s"
-        val = (new_qty, product_name)
-        self.cursor.execute(sql, val)
+        element_list = (new_qty, productName)
+        self.cursor.execute(sql, element_list)
         self.db.commit()
 
 
-    def delete_product(self):
-        product_name = input('Ingresa el nombre del producto: ')
+    def delete_product(self, productName):
         sql = "DELETE FROM product WHERE name = %s"
-        name = (product_name, )
-        self.cursor.execute(sql, name)
+        element_list = (productName, )
+        self.cursor.execute(sql, element_list)
         self.db.commit()

@@ -8,6 +8,7 @@ class Controller:
 
         #self.view.eventofiltro.connects(self.applyfilter)
 
+# Esta funcion debera iniciar 
     def startApp(self):
         self.view.startApp()
 
@@ -20,9 +21,12 @@ class Controller:
 
 
     def apply_filter(self):
-        filter = self.view.getFilter()
-        products = self.model.db.get_filtered_products(filter)
-        self.view.refreshTable()
+        filter = {}
+        products = []
+        self.view.getFilter(filter)
+        self.model.db.get_filtered_products(filter, products)
+        self.view.refreshTable(products)
+        products.clear()
 
     def load_filter(self, filterName):
         filtered_elements = []
